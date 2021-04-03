@@ -1,0 +1,20 @@
+.searchContainer{
+    height: 50px;
+    width: 100%;
+    [class~='mainsearch']{
+        display: flex;
+        .select{
+            padding: 8px;
+            width: 110px;
+        };
+        .searchInput{
+            padding: 8px;
+            width: 74%;
+        };
+        .searchButton{
+            padding: 8px;
+            width: 110px;
+        }
+    }
+   
+}

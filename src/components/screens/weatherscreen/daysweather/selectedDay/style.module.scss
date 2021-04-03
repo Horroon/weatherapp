@@ -1,0 +1,32 @@
+.SelectedDayMainContainer{
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .dayicontempContainer{
+        display: flex;
+        width: 50%;
+        .dayicon{
+            width: 50%;
+            text-align: center;
+            i{
+                font-size: 30px;
+            }
+        }
+        .temprature{
+            width: 50%;
+            display: flex;
+            h3 {
+                font-size: 20px;
+                font-weight: 300;
+            }
+        }
+    }
+
+    .dayweatherDetail{
+        width: 50%;
+        .daydetailul{
+            list-style: none;
+            margin: 0;
+        }
+    }
+}

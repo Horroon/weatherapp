@@ -1,0 +1,13 @@
+.header{
+    height: 50px;
+    background:#3b3b61;
+    & .titleparent{
+        h5{
+            margin: auto;
+            padding: 16px;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+    }
+}
