@@ -1,12 +1,43 @@
+$breakpoint-tablet: 1200px;
+
 .singledaycomponent{
     text-align: center;
-    height: 130px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    width: 18%;
+    .singledaycomponentbutton{
+        background: transparent;
+        padding: 10px;
+        height: inherit;
+        .day{
+            padding: 10px;
+        }
+        .dayicon{
+            padding: 40px;
+        }
+        .tem{
+            padding: 10px;
+        }
+    }
 }
 
 .AlldaysContainer{
     display: flex;
     justify-content: space-between;
+}
+
+@media (max-width: $breakpoint-tablet) {
+    .AlldaysContainer {
+        display: block;
+    }
+    .singledaycomponent{
+        width: 100%;
+        display: block;
+        margin: 10px;
+        .singledaycomponentbutton{
+            width: 100%;
+        }
+    }
 }

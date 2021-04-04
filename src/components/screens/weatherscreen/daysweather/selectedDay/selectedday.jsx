@@ -10,7 +10,7 @@ export const SelectedDay = memo(({})=>{
                     <div className={styles.temprature}>
                         <h3>23</h3>
                         <span>
-                            C | F
+                            <button className='selectedbtn'>C</button> | <button>F</button>
                         </span>
                     </div>
                 </div>

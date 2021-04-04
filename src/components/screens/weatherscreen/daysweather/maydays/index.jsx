@@ -5,7 +5,7 @@ import {SingleComponent} from './singlecomponent';
 export const AllDays = memo(({})=>{
     return <div className={styles.AlldaysContainer}>
         {
-            [1,2,3,4].map(item=><SingleComponent />)
+            [1,2,3,4,5].map(item=><SingleComponent />)
         }
     </div>
 })
