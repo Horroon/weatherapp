@@ -20,7 +20,6 @@ export const FormateDataToDisplayOnScreenInDays = (
     dayForAllWeather.min_temp = day.main.temp_min;
     dayForAllWeather.max_temp = day.main.temp_max;
     dayForAllWeather.selectedScale = Properties.scales.C;
-    debugger;
     dayForAllWeather.dayDetail.humidity = day.main.humidity;
     dayForAllWeather.dayDetail.pressure = day.main.pressure;
     dayForAllWeather.dayDetail.wind = day.wind.speed;

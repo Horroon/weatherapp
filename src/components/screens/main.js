@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import {Header} from './header/header';
 import {Search} from './search/search';
 import {WeatherScreen} from './weatherscreen/index';
@@ -132,7 +132,6 @@ export const MainScreen = ()=>{
         }
     };
 
-console.log('state ', state)
     return <div className={styles.mainContainer}>
         <Header />
         <div className={styles.mainBody}>
