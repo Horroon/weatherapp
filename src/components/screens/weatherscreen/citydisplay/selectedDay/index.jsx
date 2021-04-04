@@ -2,10 +2,9 @@ import React, { memo } from 'react';
 import {SelectedDay} from './selectedday';
 import {CityDisplay} from './citydisplay';
 
-export const SelectedDayComponent = memo(({citydisplay,selectedDay})=>{
-    debugger
+export const SelectedDayComponent = memo(({selectedDay,events})=>{
     return<>
-            <CityDisplay {...citydisplay} />
-            <SelectedDay {...selectedDay}  />
+            <CityDisplay {...selectedDay.citydisplay} />
+            <SelectedDay {...{...selectedDay,events}}  />
     </>
 })

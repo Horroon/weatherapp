@@ -1,16 +1,18 @@
 import React, { memo } from 'react';
 import styles from './style.module.scss';
 
-export const SelectedDay = memo(({dayicon,temp, selectedScale, changeScale, dayDetail:{pressure,humidity,wind}})=>{
+export const SelectedDay = memo(({dayicon,temp, selectedScale,changeScale, dayDetail:{pressure,humidity,wind}, events:{ChangeScale}})=>{
+
+
     return <div className={styles.SelectedDayMainContainer}>
                 <div className={styles.dayicontempContainer}>
                     <div className={styles.dayicon}>
                             {dayicon}
                     </div>
                     <div className={styles.temprature}>
-                        <h3>{temp}</h3>
+                        <h3>{(temp)}</h3>
                         <span>
-                            <button className={`${selectedScale ==='C'&& 'selectedbtn'}`}>C</button> | <button className={`${selectedScale==='F' && 'selectedbtn'}`}>F</button>
+                            <button className={`${selectedScale ==='C'&& 'selectedbtn'}`} onClick={()=>ChangeScale('C')}>C</button> | <button className={`${selectedScale==='F' && 'selectedbtn'}`} onClick={()=>ChangeScale('F')}>F</button>
                         </span>
                     </div>
                 </div>
