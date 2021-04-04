@@ -5,13 +5,13 @@ export const SingleComponent = memo(({day,dayicon,temp})=>{
     return <div className={styles.singledaycomponent}>
                 <button className={styles.singledaycomponentbutton}>
                         <div className={styles.day}>
-                            Saturday
+                            {day}
                         </div>
                         <div className={styles.dayicon}>
-                            dayicon
+                            {dayicon}
                         </div>
                         <div className={styles.tem}>
-                        23 56
+                         {temp}
                         </div>
                 </button>
              </div>

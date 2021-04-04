@@ -1,24 +1,24 @@
 import React, { memo } from 'react';
 import styles from './style.module.scss';
 
-export const SelectedDay = memo(({})=>{
+export const SelectedDay = memo(({dayicon,temp, selectedScale, changeScale, dayDetail:{pressure,humidity,wind}})=>{
     return <div className={styles.SelectedDayMainContainer}>
                 <div className={styles.dayicontempContainer}>
                     <div className={styles.dayicon}>
-                            dayicon
+                            {dayicon}
                     </div>
                     <div className={styles.temprature}>
-                        <h3>23</h3>
+                        <h3>{temp}</h3>
                         <span>
-                            <button className='selectedbtn'>C</button> | <button>F</button>
+                            <button className={`${selectedScale ==='C'&& 'selectedbtn'}`}>C</button> | <button className={`${selectedScale==='F' && 'selectedbtn'}`}>F</button>
                         </span>
                     </div>
                 </div>
                 <div className={styles.dayweatherDetail}>
                     <ul className={styles.daydetailul}>
-                        <li>Pressure: 344 hpa</li>
-                        <li>Humidity: 34%</li>
-                        <li>Wind: 34 m/s</li>
+                        <li>Pressure: {pressure} hpa</li>
+                        <li>Humidity: {humidity}%</li>
+                        <li>Wind: {wind} m/s</li>
                     </ul>
                 </div>
             </div>

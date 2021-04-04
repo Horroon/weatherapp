@@ -1,12 +1,10 @@
 import React, { memo } from 'react';
-import { CityDisplay } from './citydisplay/citydisplay';
-import { SelectedDay } from './daysweather/selectedDay/selectedday';
+import {SelectedDayComponent} from './citydisplay/selectedDay/index'
 import { AllDays } from './daysweather/maydays/index';
 
-export const WeatherScreen = memo(()=>{
+export const WeatherScreen = memo(({citydisplay, selectedDay, allDaysWeather})=>{
     return <div>
-                <CityDisplay />
-                <SelectedDay />
-                <AllDays />
+                <SelectedDayComponent {...{citydisplay, selectedDay}}  />
+                <AllDays allDaysWeather={allDaysWeather}/>
             </div>
 })
