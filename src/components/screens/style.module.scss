@@ -5,6 +5,15 @@
         .mainsearch {
             padding-top: 20px;
             margin: auto;
+        };
+        .weatherscreen{
+            [class~='notfound']{
+                display: flex;
+                padding: 80px;
+                img{
+                    margin: auto;
+                }
+            }
         }
     }
 }
