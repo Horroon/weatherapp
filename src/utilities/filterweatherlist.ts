@@ -1,6 +1,6 @@
-export const FilterWeatherList = (list)=>{
+export const FilterWeatherList = (list:any[])=>{
     let uniqueDate = '';
-    return list.filter(day=>{
+    return list.filter((day:any)=>{
             const date = day.dt_txt.split(' ')[0]
             if(uniqueDate !== date){
                 uniqueDate = date;

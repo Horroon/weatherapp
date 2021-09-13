@@ -85,7 +85,7 @@ export const MainScreen = ()=>{
         }
     }
 
-    const SelectSearchOption = (event)=>{
+    const selectSearchOption = (event)=>{
         event.preventDefault();
         const {target:{value}} = event;
         setState({
@@ -98,14 +98,14 @@ export const MainScreen = ()=>{
         });
     };
 
-    const OnSearchChange = event=>{
+    const onSearchChange = event=>{
         event.preventDefault();
         const {target:{value}}=event;
         setState({type: Properties.changeSearchInputValue, payload: value});
         state.error.isError && setState({type: Properties.updateError, payload:{isError: false, message:''}})
     }
 
-    const FetchWeather = async()=>{
+    const fetchWeather = async()=>{
         const {search:{selectedoption,uservalue}} = state;
         try{
             let response = ''
@@ -139,7 +139,7 @@ export const MainScreen = ()=>{
                 <Search 
                     classNames="mainsearch"
                     {...state.search}
-                    events={{SelectSearchOption,OnSearchChange,FetchWeather}}
+                    events={{selectSearchOption,onSearchChange,fetchWeather}}
                 />
             </div>
             <div className={styles.weatherscreen}>
