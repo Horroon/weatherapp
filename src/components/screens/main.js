@@ -3,7 +3,7 @@ import {Header} from './header/header';
 import {Search} from './search/search';
 import {WeatherScreen} from './weatherscreen/index';
 import {ConvertCentiToFehrenheit, ConvertFehrenheitToCenti, FilterWeatherList} from '../utilities/index';
-import {FormateDataToDisplayOnScreenInDays, FetchWeatherByCityName, FetchWeatherByZipCode} from '../logics/index';
+import {FormateDataToDisplayOnScreenInDays, FetchWeatherByCityName, FetchWeatherByZipCode} from '../asyncs/index';
 import {Properties, WeekDays,Key} from '../constants/properties';
 import {NotFoundImage} from './notfound/index';
 
