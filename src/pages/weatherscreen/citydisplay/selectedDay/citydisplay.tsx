@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
+import {citydisplay} from '../../../../constants/types';
 import styles from './style.module.scss';
 
-export const CityDisplay = memo(({city,day,weathercondition})=>
+export const CityDisplay:React.FC<citydisplay> = memo(({city,day,weathercondition})=>
     <div className={styles.CityDisplayContainer}>
             <div className={styles.city}>
                 <h3>{city}</h3>

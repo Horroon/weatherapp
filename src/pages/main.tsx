@@ -6,10 +6,11 @@ import {ConvertCentiToFehrenheit, ConvertFehrenheitToCenti, FilterWeatherList} f
 import {FormateDataToDisplayOnScreenInDays, FetchWeatherByCityName, FetchWeatherByZipCode} from '../asyncs/index';
 import {Properties, WeekDays,Key} from '../constants/properties';
 import {NotFoundImage} from './notfound/index';
+import {InitialStatetype} from '../constants/types';
 
 import styles from './style.module.scss';
 
-const MainScreenReducer = (state,action)=>{
+const MainScreenReducer = (state:InitialStatetype,action:any)=>{
     switch(action.type){
         case Properties.changeScale:
             return {...state, selectedDay:{...state.selectedDay, selectedScale: action.payload.scale, temp: action.payload.temp}};
@@ -28,7 +29,7 @@ const MainScreenReducer = (state,action)=>{
     }
 }
 
-const InitialState = {
+const InitialState:InitialStatetype = {
     error:{
         isError:false,
         message:'',
@@ -63,7 +64,7 @@ export const MainScreen = ()=>{
 
     const [state, setState] = useReducer(MainScreenReducer, InitialState);
 
-    const ChangeScale = (id)=>{
+    const changeScale = (id:any)=>{
         if(id===Properties.scales.C && state.selectedDay.selectedScale !== id){
             const prevFehrenheit = parseInt(state.selectedDay.temp)
             const centigradeTemp = ConvertFehrenheitToCenti(prevFehrenheit);
@@ -75,7 +76,7 @@ export const MainScreen = ()=>{
         }
     }
 
-    const SelectDay = (day)=>{
+    const selectDay = (day:any)=>{
         if(day){
             const {selectedDay} = state;
             selectedDay.citydisplay.day = day.day
@@ -85,7 +86,7 @@ export const MainScreen = ()=>{
         }
     }
 
-    const selectSearchOption = (event)=>{
+    const selectSearchOption = (event:any)=>{
         event.preventDefault();
         const {target:{value}} = event;
         setState({
@@ -98,7 +99,7 @@ export const MainScreen = ()=>{
         });
     };
 
-    const onSearchChange = event=>{
+    const onSearchChange = (event:any)=>{
         event.preventDefault();
         const {target:{value}}=event;
         setState({type: Properties.changeSearchInputValue, payload: value});
@@ -108,7 +109,7 @@ export const MainScreen = ()=>{
     const fetchWeather = async()=>{
         const {search:{selectedoption,uservalue}} = state;
         try{
-            let response = ''
+            let response = null;
             if(selectedoption === Properties.searchOptions.bycity && uservalue){
                     response = await FetchWeatherByCityName({cityname:uservalue, Key})
             }
@@ -120,7 +121,7 @@ export const MainScreen = ()=>{
             }
             
             if(response){
-                const filteredArray = FilterWeatherList(response.list)
+                const filteredArray = FilterWeatherList(response?.list || [])
 
                 filteredArray.length > 5 && filteredArray.pop()
                 
@@ -145,7 +146,7 @@ export const MainScreen = ()=>{
             <div className={styles.weatherscreen}>
                 <WeatherScreen 
                     {...state}
-                    events={{ChangeScale,SelectDay} } 
+                    events={{changeScale,selectDay} } 
                     />
                     
                 <NotFoundImage {...state} />
