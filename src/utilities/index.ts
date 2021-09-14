@@ -1,9 +1,9 @@
-import {ConvertCentiToFehrenheit} from './centitofehren';
-import {ConvertFehrenheitToCenti} from './fehrenheittocenti';
+import {CentiToFehrenheit} from './centitofehren';
+import {FehrenheitToCenti} from './fehrenheittocenti';
 import {FilterWeatherList} from './filterweatherlist';
 
 export{
-    ConvertFehrenheitToCenti,
-    ConvertCentiToFehrenheit,
+    FehrenheitToCenti,
+    CentiToFehrenheit,
     FilterWeatherList,
 }

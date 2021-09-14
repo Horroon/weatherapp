@@ -32,8 +32,8 @@ const initialState:InitialStatetype = {
   allDaysWeather:[]
 }
 
-export const appReducer = createSlice({
-  name: 'appreducer',
+export const weatherForcast = createSlice({
+  name: 'weatherforcast',
   initialState,
   reducers: {
     changeScale: (state, action:PayloadAction<{scale:string,temp:number}>) => ({...state, selectedDay:{...state.selectedDay, selectedScale: action.payload.scale, temp: action.payload.temp}}),
@@ -41,11 +41,12 @@ export const appReducer = createSlice({
     changeSearchOption: (state, action: PayloadAction<any>) => ({...state, search:{...state.search, ...action.payload}}),
     changeSearchInputValue: (state, action: PayloadAction<string>) => ({...state, search:{...state.search, uservalue: action.payload}}),
     updateAllDaysWeather: (state, action: PayloadAction<{updatedweathers:any[], selectedDay: selectedDay}>) => ({...state, allDaysWeather: action.payload.updatedweathers, selectedDay: action.payload.selectedDay }), 
-    updateError: (state, action: PayloadAction<error>) => ({...state, error:action.payload})
+    updateError: (state, action: PayloadAction<error>) => ({...state, error:action.payload}),
+    reset: ()=>initialState
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { changeScale, selectDay, changeSearchInputValue, changeSearchOption, updateAllDaysWeather, updateError } = appReducer.actions
+export const { changeScale, selectDay, changeSearchInputValue, changeSearchOption, updateAllDaysWeather, updateError, reset } = weatherForcast.actions
 
-export default appReducer.reducer
+export default weatherForcast.reducer

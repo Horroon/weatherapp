@@ -3,7 +3,7 @@ import {URLS} from '../../../../constants/properties';
 import styles from './style.module.scss';
 import {singledaycomponenttype} from './types';
 
-export const SingleComponent:React.FC<singledaycomponenttype> = memo(({date, events:{selectDay}})=>{
+export const SingleDay:React.FC<singledaycomponenttype> = memo(({date, events:{selectDay}})=>{
     const {day,dayicon,temp, min_temp,max_temp} = date
     return <div className={styles.singledaycomponent}>
                 <button className={styles.singledaycomponentbutton} onClick={()=>selectDay(date)}>

@@ -1,1 +1,1 @@
-export const ConvertCentiToFehrenheit = (preCentigrade:number)=>((preCentigrade * 9/5) + 32);
+export const CentiToFehrenheit = (preCentigrade:number)=>((preCentigrade * 9/5) + 32);
