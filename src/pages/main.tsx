@@ -30,13 +30,15 @@ export const MainScreen = ()=>{
         if(id===Properties.scales.C && State.selectedDay.selectedScale !== id){
             const prevFehrenheit = State.selectedDay.temp;
             const centigradeTemp = FehrenheitToCenti(prevFehrenheit);
+            debugger
             dispatch(scaleAction({scale: id, temp: Math.trunc(centigradeTemp) }));
         }else if(id===Properties.scales.F && State.selectedDay.selectedScale !== id){
             const prevCentigrade = State.selectedDay.temp;
             const fehrenheitTemp = CentiToFehrenheit(prevCentigrade)
+            debugger
             dispatch(scaleAction({scale: id, temp: Math.trunc(fehrenheitTemp)}));
         }
-    },[State.selectedDay.selectedScale])
+    },[State.selectedDay])
 
     const selectDay = useCallback((day:any)=>{
         if(day){
@@ -79,9 +81,9 @@ export const MainScreen = ()=>{
             }
             
             if(response){
-                const filteredArray = FilterWeatherList(response?.list || [])
                 debugger
-                filteredArray.length > 5 && filteredArray.pop()
+                const filteredArray = response.list //FilterWeatherList(response?.list || [])
+                debugger
                 const days = FormateDataToDisplayOnScreenInDays(filteredArray, response.city, Properties, WeekDays);
                 dispatch(updateAllDaysWeather(days));
                 State.error.isError && dispatch(updateError({isError: false, message:''}));
