@@ -41,7 +41,7 @@ export const MainScreen = ()=>{
     const selectDay = useCallback((day:any)=>{
         if(day){
             const {selectedDay} = State;
-            const newDay = {...selectedDay, ...day};
+            const newDay = {...selectedDay, citydisplay:{...selectedDay.citydisplay, day: day.day, weathercondition: day.weathercondition},  ...day};
             dispatch(dayAction(newDay));
         }
     },[State.selectedDay]);
