@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {Header} from '../components/header/header';
 import {Search} from '../components/search/search';
