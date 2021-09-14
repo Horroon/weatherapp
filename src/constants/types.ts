@@ -16,11 +16,12 @@ export type selectedDay = {
   citydisplay:citydisplay,
 }
 
+export type error = {
+  isError:boolean,
+  message:string
+}
 export type InitialStatetype = {
-  error:{
-      isError:boolean,
-      message:string,
-  },
+  error:error,
   search:{
       options:[{name:string, label:string},{name: string, label:string},{name: string, label:string}],
       placeholder:string,

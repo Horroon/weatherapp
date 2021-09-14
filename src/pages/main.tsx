@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import {useSelector, useDispatch} from 'react-redux'
 import {Header} from './header/header';
 import {Search} from './search/search';
 import {WeatherScreen} from './weatherscreen/index';
@@ -7,7 +8,8 @@ import {FormateDataToDisplayOnScreenInDays, FetchWeatherByCityName, FetchWeather
 import {Properties, WeekDays,Key} from '../constants/properties';
 import {NotFoundImage} from './notfound/index';
 import {InitialStatetype} from '../constants/types';
-
+import {changeScale as scaleAction,selectDay as dayAction,changeSearchInputValue, changeSearchOption, updateError, updateAllDaysWeather} from '../reducers/appreducer'
+import {RootState} from '../store/store'
 import styles from './style.module.scss';
 
 const MainScreenReducer = (state:InitialStatetype,action:any)=>{
@@ -63,15 +65,19 @@ const InitialState:InitialStatetype = {
 export const MainScreen = ()=>{
 
     const [state, setState] = useReducer(MainScreenReducer, InitialState);
+    const State = useSelector((state:RootState)=>state.appReducer);
+    const dispatch  = useDispatch();
 
     const changeScale = (id:any)=>{
         if(id===Properties.scales.C && state.selectedDay.selectedScale !== id){
             const prevFehrenheit = parseInt(state.selectedDay.temp)
             const centigradeTemp = ConvertFehrenheitToCenti(prevFehrenheit);
+            dispatch(scaleAction({scale: id, temp: Math.trunc(centigradeTemp) }));
             setState({type: Properties.changeScale, payload:{scale: id, temp: Math.trunc(centigradeTemp) } })
         }else if(id===Properties.scales.F && state.selectedDay.selectedScale !== id){
             const prevCentigrade = parseInt(state.selectedDay.temp)
             const fehrenheitTemp = ConvertCentiToFehrenheit(prevCentigrade)
+            dispatch(scaleAction({scale: id, temp: Math.trunc(fehrenheitTemp)}));
             setState({type: Properties.changeScale, payload:{scale: id, temp: Math.trunc(fehrenheitTemp)} })
         }
     }
@@ -79,31 +85,37 @@ export const MainScreen = ()=>{
     const selectDay = (day:any)=>{
         if(day){
             const {selectedDay} = state;
-            selectedDay.citydisplay.day = day.day
-            selectedDay.citydisplay.weathercondition = day.weathercondition
-            selectedDay.dayDetail = day.dayDetail
-            setState({type: Properties.selectDay, payload: {...selectedDay, ...day}});
+            const newDay = {...selectedDay, ...day};
+            // selectedDay.citydisplay.day = day.day
+            // selectedDay.citydisplay.weathercondition = day.weathercondition
+            // selectedDay.dayDetail = day.dayDetail
+            dispatch(dayAction(newDay));
+            setState({type: Properties.selectDay, payload: {...newDay}});
         }
     }
 
     const selectSearchOption = (event:any)=>{
         event.preventDefault();
         const {target:{value}} = event;
+        const payload = {
+            placeholder:'Search by '+ value,
+            selectedoption: value,
+            uservalue:'',
+        };
+        dispatch(changeSearchOption(payload))
         setState({
             type: Properties.changeSearchOption,
-            payload:{
-                placeholder:'Search by '+ value,
-                selectedoption: value,
-                uservalue:'',
-            }
+            payload
         });
     };
 
     const onSearchChange = (event:any)=>{
         event.preventDefault();
         const {target:{value}}=event;
+        dispatch(changeSearchInputValue(value));
         setState({type: Properties.changeSearchInputValue, payload: value});
-        state.error.isError && setState({type: Properties.updateError, payload:{isError: false, message:''}})
+        state.error.isError && setState({type: Properties.updateError,payload:{isError: false, message:''}});
+        state.error.isError && updateError({isError: false, message:''});
     }
 
     const fetchWeather = async()=>{
@@ -124,15 +136,17 @@ export const MainScreen = ()=>{
                 const filteredArray = FilterWeatherList(response?.list || [])
 
                 filteredArray.length > 5 && filteredArray.pop()
-                
-                setState({type: Properties.updateAllDaysWeather, payload: FormateDataToDisplayOnScreenInDays(filteredArray, response.city, Properties, WeekDays)})
+                const days = FormateDataToDisplayOnScreenInDays(filteredArray, response.city, Properties, WeekDays);
+                dispatch(updateAllDaysWeather(days));
+                setState({type: Properties.updateAllDaysWeather, payload: days})
             }
         }
         catch(e){
+           dispatch(updateError({message:"Not Found", isError: true}))
            setState({type: Properties.updateError, payload: {message:"Not Found", isError: true}})
         }
     };
-
+    console.log('state ', state, 'redux State ', State)
     return <div className={styles.mainContainer}>
         <Header />
         <div className={styles.mainBody}>
