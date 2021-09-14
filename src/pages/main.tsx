@@ -6,7 +6,6 @@ import {WeatherScreen} from './weatherscreen/index';
 import {
     CentiToFehrenheit,
     FehrenheitToCenti, 
-    FilterWeatherList, 
     FetchWeatherByCityName, 
     FetchWeatherByZipCode, FormateDataToDisplayOnScreenInDays} from '../utilities/index';
 import {Properties, WeekDays,Key} from '../constants/properties';
@@ -21,7 +20,7 @@ import {RootState} from '../store/store';
 import styles from './style.module.scss';
 
 
-export const MainScreen = ()=>{
+export const MainScreen:React.FC = ()=>{
 
     const State = useSelector((State:RootState)=>State.weatherForcast);
     const dispatch  = useDispatch();
@@ -94,13 +93,6 @@ export const MainScreen = ()=>{
            dispatch(updateError({message:"Not Found", isError: true}));
         }
     },[State.search]);
-    // useEffect(()=>{
-    //     fetch('https://api.tvmaze.com/search?q=osman',{mode:'cors'}).then(resp=>resp.json()).then(result=>{
-    //         console.log('Result ', result);
-    //     }).catch(e=>{
-    //         console.log('Error ', e)
-    //     })
-    // },[])
     return <div className={styles.mainContainer}>
         <Header />
         <div className={styles.mainBody}>
