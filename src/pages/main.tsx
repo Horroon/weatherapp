@@ -29,12 +29,10 @@ export const MainScreen:React.FC = ()=>{
         if(id===Properties.scales.C && State.selectedDay.selectedScale !== id){
             const prevFehrenheit = State.selectedDay.temp;
             const centigradeTemp = FehrenheitToCenti(prevFehrenheit);
-            debugger
             dispatch(scaleAction({scale: id, temp: Math.trunc(centigradeTemp) }));
         }else if(id===Properties.scales.F && State.selectedDay.selectedScale !== id){
             const prevCentigrade = State.selectedDay.temp;
             const fehrenheitTemp = CentiToFehrenheit(prevCentigrade)
-            debugger
             dispatch(scaleAction({scale: id, temp: Math.trunc(fehrenheitTemp)}));
         }
     },[State.selectedDay])
@@ -42,7 +40,7 @@ export const MainScreen:React.FC = ()=>{
     const selectDay = useCallback((day:any)=>{
         if(day){
             const {selectedDay} = State;
-            const newDay = {...selectedDay, citydisplay:{...selectedDay.citydisplay, day: day.day, weathercondition: day.weathercondition},  ...day};
+            const newDay = {...selectedDay, ...day, citydisplay:{...selectedDay.citydisplay, day: day.day, weathercondition: day.weathercondition}};
             dispatch(dayAction(newDay));
         }
     },[State.selectedDay]);
@@ -70,19 +68,17 @@ export const MainScreen:React.FC = ()=>{
         try{
             let response = null;
             if(selectedoption === Properties.searchOptions.bycity && uservalue){
-                    response = await FetchWeatherByCityName({cityname:uservalue, Key})
+                    response = await FetchWeatherByCityName(uservalue, Key)
             }
             else if(selectedoption === Properties.searchOptions.byzipcode && uservalue){
-                    response = await FetchWeatherByZipCode({zipcode: uservalue, Key})
+                    response = await FetchWeatherByZipCode(uservalue, Key);
             }
             else if(selectedoption === Properties.searchOptions.bycityId && uservalue){
                 alert('soon by cityid')
             }
             
             if(response){
-                debugger
                 const filteredArray = response.list //FilterWeatherList(response?.list || [])
-                debugger
                 const days = FormateDataToDisplayOnScreenInDays(filteredArray, response.city, Properties, WeekDays);
                 dispatch(updateAllDaysWeather(days));
                 State.error.isError && dispatch(updateError({isError: false, message:''}));

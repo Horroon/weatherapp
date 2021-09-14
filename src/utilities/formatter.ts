@@ -1,21 +1,31 @@
 export const FormateDataToDisplayOnScreenInDays = (
-  RawWeatberData,
-  cityInWeatherResponse,
-  Properties,
-  WeekDays
+  RawWeatberData:any[],
+  cityInWeatherResponse:any,
+  Properties:any,
+  WeekDays:string[]
 ) => {
-  debugger
   const formattedData = RawWeatberData.map((day) => {
     const dayForAllWeather = {
+      day:'',
+      dayicon: '',
+      weathercondition:'',
+      temp:0,
+      min_temp:0,
+      max_temp:0,
+      selectedScale:'',
       dayDetail: {
-        humidity: "",
-        pressure: "",
-        wind: "",
+        humidity: 0,
+        pressure: 0,
+        wind: 0,
       },
+      citydisplay:{
+        city:'',
+        day: '',
+        weathercondition:''
+      }
     };
-    debugger
+
     const dayNumber = new Date(day.dt * 1000).getDay();
-    debugger
     dayForAllWeather.day = WeekDays[dayNumber];
     dayForAllWeather.dayicon = day.weather[0].icon;
     dayForAllWeather.weathercondition = day.weather[0].description;
@@ -36,6 +46,5 @@ export const FormateDataToDisplayOnScreenInDays = (
     day: formattedData[0].day,
     weathercondition: formattedData[0].weathercondition,
   };
-  debugger
   return {updatedweathers: formattedData, selectedDay}
 };
