@@ -8,9 +8,14 @@ $breakpoint-tablet: 1200px;
     justify-content: space-around;
     width: 18%;
     .singledaycomponentbutton{
-        background: transparent;
         padding: 10px;
         height: inherit;
+        border: none;
+        background: #3a313126;
+        border-radius: 5px;
+        font-size: 20px;
+        color: white;
+        font-weight: bold;
         .day{
             padding: 10px;
         }

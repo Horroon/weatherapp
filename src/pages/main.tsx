@@ -1,13 +1,22 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {Header} from '../components/header/header';
 import {Search} from '../components/search/search';
 import {WeatherScreen} from './weatherscreen/index';
-import {CentiToFehrenheit, FehrenheitToCenti, FilterWeatherList} from '../utilities/index';
-import {FormateDataToDisplayOnScreenInDays, FetchWeatherByCityName, FetchWeatherByZipCode} from '../asyncs/index';
+import {
+    CentiToFehrenheit,
+    FehrenheitToCenti, 
+    FilterWeatherList, 
+    FetchWeatherByCityName, 
+    FetchWeatherByZipCode, FormateDataToDisplayOnScreenInDays} from '../utilities/index';
 import {Properties, WeekDays,Key} from '../constants/properties';
 import {NotFoundImage} from './notfound/index';
-import {changeScale as scaleAction,selectDay as dayAction,changeSearchInputValue, changeSearchOption, updateError, updateAllDaysWeather, reset} from '../reducers/weatherForcast'
+import {
+    changeScale as scaleAction,selectDay as dayAction,
+    changeSearchInputValue, 
+    changeSearchOption, 
+    updateError, 
+    updateAllDaysWeather, reset} from '../reducers/weatherForcast';
 import {RootState} from '../store/store';
 import styles from './style.module.scss';
 
@@ -71,7 +80,7 @@ export const MainScreen = ()=>{
             
             if(response){
                 const filteredArray = FilterWeatherList(response?.list || [])
-
+                debugger
                 filteredArray.length > 5 && filteredArray.pop()
                 const days = FormateDataToDisplayOnScreenInDays(filteredArray, response.city, Properties, WeekDays);
                 dispatch(updateAllDaysWeather(days));
@@ -83,7 +92,13 @@ export const MainScreen = ()=>{
            dispatch(updateError({message:"Not Found", isError: true}));
         }
     },[State.search]);
-
+    // useEffect(()=>{
+    //     fetch('https://api.tvmaze.com/search?q=osman',{mode:'cors'}).then(resp=>resp.json()).then(result=>{
+    //         console.log('Result ', result);
+    //     }).catch(e=>{
+    //         console.log('Error ', e)
+    //     })
+    // },[])
     return <div className={styles.mainContainer}>
         <Header />
         <div className={styles.mainBody}>
