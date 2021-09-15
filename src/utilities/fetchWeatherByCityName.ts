@@ -1,3 +1,8 @@
-export const FetchWeatherByCityName = async(cityname:string,Key:string):Promise<any>=>{
-    return await fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${cityname}&cnt=7&units=metric&appid=${Key}`).then(res=>res.json())
-}
+import { ApiEndPoint, searchby } from "./apiEndPoint";
+export const FetchWeatherByCityName = async (
+  cityname: string,
+  Key: string
+): Promise<any> => {
+  const URL = ApiEndPoint(cityname, Key, searchby.q);
+  return await fetch(URL).then((res) => res.json());
+};
